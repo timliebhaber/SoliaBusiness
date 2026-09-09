@@ -29,7 +29,7 @@ export function App() {
     return (
       <div className="center-fill">
         <span className="spin" />
-        Kontor wird geladen …
+        SoliaBusiness wird geladen …
       </div>
     );
   }

@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { toKontorError } from "./api";
+import { toSoliaBusinessError } from "./api";
 
 type Tone = "info" | "success" | "error";
 
@@ -56,7 +56,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       info: (title, detail) => push("info", title, detail),
       success: (title, detail) => push("success", title, detail),
       error: (error, context) => {
-        const err = toKontorError(error);
+        const err = toSoliaBusinessError(error);
         push("error", context ?? "Das hat nicht geklappt", err.message);
       },
     }),

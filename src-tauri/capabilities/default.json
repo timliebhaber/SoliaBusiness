@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Rechte des Hauptfensters von Kontor.",
+  "description": "Rechte des Hauptfensters von SoliaBusiness.",
   "windows": ["main"],
   "permissions": [
     "core:default",

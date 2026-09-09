@@ -127,7 +127,7 @@ export function SettingsView() {
             <div className="stack">
               <Notice tone="info">
                 SevDesk authentifiziert über einen festen API-Token (kein OAuth). Du findest ihn in
-                SevDesk unter <strong>Einstellungen → Benutzer → API-Token</strong>. Kontor legt ihn
+                SevDesk unter <strong>Einstellungen → Benutzer → API-Token</strong>. SoliaBusiness legt ihn
                 im macOS-Schlüsselbund ab — nicht in der Datenbank und nicht in einer Konfigurationsdatei.
               </Notice>
 
@@ -295,7 +295,7 @@ export function SettingsView() {
                 onChange={(value) => patch({ weeklyReportEnabled: value })}
               />
               <div style={{ fontSize: 11.5, color: "var(--text-muted)", marginTop: -6 }}>
-                Erscheint einmal pro Woche beim ersten Start von Kontor und fasst unabgerechnete
+                Erscheint einmal pro Woche beim ersten Start von SoliaBusiness und fasst unabgerechnete
                 Zeit sowie überfällige Aufgaben zusammen.
               </div>
 
@@ -306,7 +306,7 @@ export function SettingsView() {
               ) : null}
 
               <div style={{ fontSize: 11.5, color: "var(--text-muted)" }}>
-                Kontor {info?.version ?? ""} · Alle Daten liegen lokal. Der einzige Netzwerkzugriff
+                SoliaBusiness {info?.version ?? ""} · Alle Daten liegen lokal. Der einzige Netzwerkzugriff
                 ist die SevDesk-API.
               </div>
             </div>

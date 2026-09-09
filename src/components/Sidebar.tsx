@@ -34,7 +34,7 @@ export function Sidebar({
       <div className="titlebar-pad" data-tauri-drag-region />
       <div className="sidebar-brand" data-tauri-drag-region>
         <IconClock className="mark" />
-        Kontor
+        SoliaBusiness
       </div>
 
       <nav className="nav">

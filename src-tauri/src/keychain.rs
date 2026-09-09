@@ -1,7 +1,7 @@
 use crate::error::{AppError, AppResult};
 use keyring::Entry;
 
-const SERVICE: &str = "de.solia.kontor";
+const SERVICE: &str = "de.solia.soliabusiness";
 const ACCOUNT: &str = "sevdesk-api-token";
 
 fn entry() -> AppResult<Entry> {

@@ -8,7 +8,7 @@ import { api } from "../lib/api";
 import { formatCents, formatDuration, startOfWeek, isoDate } from "../lib/format";
 import type { AppSettings } from "../lib/types";
 
-const STORAGE_KEY = "kontor.weeklyReport.lastShown";
+const STORAGE_KEY = "soliabusiness.weeklyReport.lastShown";
 
 /**
  * Wochenüberblick als Systemmitteilung. Bewusst beim Start der App statt als
@@ -41,7 +41,7 @@ export function useWeeklyReport(settings: AppSettings | null) {
             : null,
         ].filter(Boolean);
 
-        sendNotification({ title: "Kontor — Wochenüberblick", body: parts.join(" · ") });
+        sendNotification({ title: "SoliaBusiness — Wochenüberblick", body: parts.join(" · ") });
         window.localStorage.setItem(STORAGE_KEY, weekKey);
       } catch {
         // Eine fehlgeschlagene Erinnerung darf den Start nicht stören.

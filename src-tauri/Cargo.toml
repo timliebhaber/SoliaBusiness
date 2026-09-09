@@ -1,5 +1,5 @@
 [package]
-name = "kontor"
+name = "soliabusiness"
 version = "1.0.0"
 description = "Kunden-, Aufgaben- und Zeitverwaltung fuer Freelancer"
 authors = ["Tim Liebhaber"]
@@ -7,7 +7,7 @@ edition = "2021"
 rust-version = "1.85"
 
 [lib]
-name = "kontor_lib"
+name = "soliabusiness_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [profile.release]

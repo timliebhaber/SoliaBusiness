@@ -24,7 +24,7 @@ fn app_info(app: tauri::AppHandle) -> AppResult<AppInfo> {
     let path = app
         .path()
         .app_data_dir()
-        .map(|d| d.join("kontor.sqlite3").to_string_lossy().to_string())
+        .map(|d| d.join("soliabusiness.sqlite3").to_string_lossy().to_string())
         .unwrap_or_else(|_| "unbekannt".into());
     Ok(AppInfo {
         version: app.package_info().version.to_string(),
@@ -74,7 +74,7 @@ pub fn run() {
             let data_dir = handle.path().app_data_dir().map_err(|e| {
                 format!("Der Datenordner der App ist nicht erreichbar: {e}")
             })?;
-            let db = db::Db::open(&data_dir.join("kontor.sqlite3")).map_err(|e| {
+            let db = db::Db::open(&data_dir.join("soliabusiness.sqlite3")).map_err(|e| {
                 // Ohne Datenbank ist die App nicht sinnvoll benutzbar — hier
                 // wird bewusst laut abgebrochen statt still weiterzulaufen.
                 format!("Die Datenbank konnte nicht geöffnet werden: {e}")
@@ -151,7 +151,7 @@ pub fn run() {
             commands::export::export_time_entries_csv,
         ])
         .build(tauri::generate_context!())
-        .expect("Kontor konnte nicht gestartet werden")
+        .expect("SoliaBusiness konnte nicht gestartet werden")
         .run(|app, event| {
             // Klick auf das Dock-Symbol holt das versteckte Fenster zurück.
             #[cfg(target_os = "macos")]

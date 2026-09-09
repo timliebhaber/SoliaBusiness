@@ -3,7 +3,7 @@ use tauri::menu::{Menu, MenuBuilder, MenuItemBuilder, SubmenuBuilder};
 use tauri::tray::{TrayIcon, TrayIconBuilder};
 use tauri::{AppHandle, Emitter, Manager, Runtime};
 
-pub const TRAY_ID: &str = "kontor-tray";
+pub const TRAY_ID: &str = "soliabusiness-tray";
 
 fn hhmm(seconds: i64) -> String {
     let minutes = seconds / 60;
@@ -95,9 +95,9 @@ fn build_menu<R: Runtime>(app: &AppHandle<R>, model: &TrayModel) -> tauri::Resul
 
     builder
         .separator()
-        .item(&MenuItemBuilder::with_id("open", "Kontor öffnen").build(app)?)
+        .item(&MenuItemBuilder::with_id("open", "SoliaBusiness öffnen").build(app)?)
         .separator()
-        .item(&MenuItemBuilder::with_id("quit", "Kontor beenden").build(app)?)
+        .item(&MenuItemBuilder::with_id("quit", "SoliaBusiness beenden").build(app)?)
         .build()
 }
 

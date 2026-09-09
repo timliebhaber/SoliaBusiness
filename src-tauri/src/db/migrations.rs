@@ -89,7 +89,7 @@ pub fn run(conn: &mut Connection) -> AppResult<()> {
 
     if current > target {
         return Err(crate::error::AppError::Db(format!(
-            "Die Datenbank stammt aus einer neueren Version von Kontor \
+            "Die Datenbank stammt aus einer neueren Version von SoliaBusiness \
              (Schema {current}, unterstützt wird {target}). Bitte die App aktualisieren."
         )));
     }

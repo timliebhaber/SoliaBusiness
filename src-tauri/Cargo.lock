@@ -2181,27 +2181,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "kontor"
-version = "1.0.0"
-dependencies = [
- "chrono",
- "keyring",
- "log",
- "reqwest",
- "rusqlite",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
- "tauri-plugin-dialog",
- "tauri-plugin-notification",
- "tauri-plugin-opener",
- "thiserror 2.0.20",
- "tokio",
- "window-vibrancy 0.8.0",
-]
-
-[[package]]
 name = "libappindicator"
 version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3875,6 +3854,27 @@ dependencies = [
  "wasm-bindgen",
  "web-sys",
  "windows-sys 0.61.2",
+]
+
+[[package]]
+name = "soliabusiness"
+version = "1.0.0"
+dependencies = [
+ "chrono",
+ "keyring",
+ "log",
+ "reqwest",
+ "rusqlite",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-dialog",
+ "tauri-plugin-notification",
+ "tauri-plugin-opener",
+ "thiserror 2.0.20",
+ "tokio",
+ "window-vibrancy 0.8.0",
 ]
 
 [[package]]

@@ -99,7 +99,7 @@ export function TimeEntriesView({ customerId }: { customerId: number | null }) {
     try {
       const suffix = filter.from && filter.to ? `${filter.from}_bis_${filter.to}` : "alle";
       const path = await save({
-        defaultPath: `kontor-zeiten-${suffix}.csv`,
+        defaultPath: `soliabusiness-zeiten-${suffix}.csv`,
         filters: [{ name: "CSV", extensions: ["csv"] }],
       });
       if (!path) return;

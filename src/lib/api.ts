@@ -23,13 +23,13 @@ import type {
 } from "./types";
 
 /** Fehler aus dem Rust-Backend, angereichert um Kategorie und Wiederholbarkeit. */
-export class KontorError extends Error {
+export class SoliaBusinessError extends Error {
   readonly kind: ErrorKind;
   readonly retryable: boolean;
 
   constructor(message: string, kind: ErrorKind, retryable: boolean) {
     super(message);
-    this.name = "KontorError";
+    this.name = "SoliaBusinessError";
     this.kind = kind;
     this.retryable = retryable;
   }
@@ -47,22 +47,22 @@ function isBackendError(
   );
 }
 
-export function toKontorError(error: unknown): KontorError {
-  if (error instanceof KontorError) return error;
+export function toSoliaBusinessError(error: unknown): SoliaBusinessError {
+  if (error instanceof SoliaBusinessError) return error;
   if (isBackendError(error)) {
-    return new KontorError(error.message, error.kind, Boolean(error.retryable));
+    return new SoliaBusinessError(error.message, error.kind, Boolean(error.retryable));
   }
   if (error instanceof Error) {
-    return new KontorError(error.message, "internal", false);
+    return new SoliaBusinessError(error.message, "internal", false);
   }
-  return new KontorError(String(error), "internal", false);
+  return new SoliaBusinessError(String(error), "internal", false);
 }
 
 async function call<T>(command: string, args?: Record<string, unknown>): Promise<T> {
   try {
     return await invoke<T>(command, args);
   } catch (error) {
-    throw toKontorError(error);
+    throw toSoliaBusinessError(error);
   }
 }
 

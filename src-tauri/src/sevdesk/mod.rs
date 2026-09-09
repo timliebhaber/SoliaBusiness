@@ -28,7 +28,7 @@ impl SevDesk {
         let client = reqwest::Client::builder()
             .connect_timeout(Duration::from_secs(10))
             .timeout(Duration::from_secs(45))
-            .user_agent("Kontor/1.0 (macOS)")
+            .user_agent("SoliaBusiness/1.0 (macOS)")
             .build()
             .map_err(|e| AppError::Network(format!("HTTP-Client nicht initialisierbar: {e}")))?;
         Ok(Self {

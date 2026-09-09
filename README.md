@@ -1,4 +1,4 @@
-# Kontor
+# SoliaBusiness
 
 Native macOS-App für Freelancer: Kundenverwaltung, aufgabenbasiertes To-Do-Tracking,
 Zeiterfassung und Rechnungsentwürfe über die SevDesk-API.
@@ -12,8 +12,8 @@ Offline-first — alle Daten liegen lokal in SQLite. Der einzige Netzwerkzugriff
 | Shell      | Tauri 2 (`.app`-Bundle, Dock- und Menüleisten-Icon) |
 | Frontend   | React 19 + TypeScript (strict) + Vite |
 | Backend    | Rust — SQLite (rusqlite, gebündelt), Keychain, HTTP |
-| Datenbank  | SQLite mit WAL unter `~/Library/Application Support/de.solia.kontor/kontor.sqlite3` |
-| Geheimnis  | SevDesk-Token im macOS-Schlüsselbund (`de.solia.kontor` / `sevdesk-api-token`) |
+| Datenbank  | SQLite mit WAL unter `~/Library/Application Support/de.solia.soliabusiness/soliabusiness.sqlite3` |
+| Geheimnis  | SevDesk-Token im macOS-Schlüsselbund (`de.solia.soliabusiness` / `sevdesk-api-token`) |
 
 ## Entwicklung
 
@@ -59,7 +59,7 @@ Umgerechnet wird erst bei der Anzeige und beim Rechnungsaufbau.
 
 **Auth-Flow:** SevDesk nutzt einen statischen API-Token, kein OAuth. Der Token wandert
 unverändert in den `Authorization`-Header. Zu finden in SevDesk unter
-*Einstellungen → Benutzer → API-Token*. Kontor legt ihn im Schlüsselbund ab; er erreicht
+*Einstellungen → Benutzer → API-Token*. SoliaBusiness legt ihn im Schlüsselbund ab; er erreicht
 weder die SQLite-Datei noch das Frontend — die UI sieht nur die letzten vier Zeichen.
 
 **Was passiert beim Rechnungslauf**
@@ -80,7 +80,7 @@ weder die SQLite-Datei noch das Frontend — die UI sieht nur die letzten vier Z
 * Scheitert das lokale Markieren, obwohl der Entwurf steht, meldet die App das mit
   Rechnungsnummer — statt stillschweigend einen halben Zustand zu hinterlassen.
 
-**Steuerfelder:** Buchhaltungsversion 1.x erwartet `taxType`, 2.x `taxRule`. Kontor erkennt
+**Steuerfelder:** Buchhaltungsversion 1.x erwartet `taxType`, 2.x `taxRule`. SoliaBusiness erkennt
 das über `/Tools/bookkeepingSystemVersion`; in den Einstellungen lässt es sich überschreiben.
 Ebenso Steuersatz, Steuertext, Zahlungsziel, Kopf-/Fußtext und die Abrechnungstaktung.
 
