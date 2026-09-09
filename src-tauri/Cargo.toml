@@ -1,0 +1,40 @@
+[package]
+name = "kontor"
+version = "1.0.0"
+description = "Kunden-, Aufgaben- und Zeitverwaltung fuer Freelancer"
+authors = ["Tim Liebhaber"]
+edition = "2021"
+rust-version = "1.85"
+
+[lib]
+name = "kontor_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+chrono = "0.4.45"
+keyring = { version = "3.6.3", features = ["apple-native"] }
+log = "0.4.34"
+reqwest = { version = "0.13.5", default-features = false, features = ["json", "gzip", "http2", "default-tls", "query"] }
+rusqlite = { version = "0.40.2", features = ["bundled"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+tauri = { version = "2.11.5", features = ["macos-private-api", "tray-icon", "image-png"] }
+tauri-plugin-dialog = "2.7.3"
+tauri-plugin-notification = "2.4.0"
+tauri-plugin-opener = "2.5.5"
+thiserror = "2.0.20"
+tokio = { version = "1.53.1", features = ["time"] }
+window-vibrancy = "0.8.0"
+
+[dev-dependencies]
+tokio = { version = "1.53.1", features = ["macros", "rt-multi-thread"] }

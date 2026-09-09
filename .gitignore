@@ -1,0 +1,13 @@
+# Abhängigkeiten und Build-Ergebnisse
+node_modules
+dist
+src-tauri/target
+
+# Von tauri-build bei jedem Lauf neu erzeugt
+src-tauri/gen/schemas
+
+# macOS
+.DS_Store
+
+# Lokale Überschreibungen
+*.local
