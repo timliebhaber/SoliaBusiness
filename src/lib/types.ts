@@ -135,7 +135,6 @@ export interface Dashboard {
 export interface InvoicePosition {
   taskId: number | null;
   name: string;
-  text: string;
   minutes: number;
   billedMinutes: number;
   hours: number;

@@ -214,7 +214,6 @@ pub struct Dashboard {
 pub struct InvoicePosition {
     pub task_id: Option<i64>,
     pub name: String,
-    pub text: String,
     pub minutes: i64,
     /// Nach optionaler Taktung aufgerundete Minuten.
     pub billed_minutes: i64,

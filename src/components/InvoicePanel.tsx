@@ -329,16 +329,6 @@ export function InvoicePanel({
                   <tr key={position.taskId ?? `other-${index}`}>
                     <td>
                       <div style={{ fontWeight: 550 }}>{position.name}</div>
-                      <div
-                        style={{
-                          marginTop: 3,
-                          fontSize: 11.5,
-                          color: "var(--text-muted)",
-                          whiteSpace: "pre-wrap",
-                        }}
-                      >
-                        {position.text}
-                      </div>
                     </td>
                     <td className="numeric">
                       {position.hours.toLocaleString("de-DE", { minimumFractionDigits: 2 })}

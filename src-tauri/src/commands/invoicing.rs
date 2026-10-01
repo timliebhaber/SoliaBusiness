@@ -5,7 +5,7 @@ use crate::keychain;
 use crate::models::{InvoicePosition, InvoicePreview, InvoiceRecord, InvoiceResult};
 use crate::sevdesk::{SevDesk, WEB_BASE};
 use crate::state::AppState;
-use chrono::{DateTime, Local};
+use chrono::Local;
 use rusqlite::{params, Connection};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -17,9 +17,7 @@ struct RawEntry {
     id: i64,
     task_id: Option<i64>,
     task_title: Option<String>,
-    start_time: String,
     minutes: i64,
-    note: Option<String>,
 }
 
 fn round_up(minutes: i64, increment: i64) -> i64 {
@@ -40,7 +38,7 @@ fn build_preview(conn: &Connection, customer_id: i64) -> AppResult<InvoicePrevie
     let settings = load_settings(conn)?;
 
     let mut stmt = conn.prepare(
-        "SELECT e.id, e.task_id, t.title, e.start_time, e.duration_minutes, e.note
+        "SELECT e.id, e.task_id, t.title, e.duration_minutes
            FROM time_entries e
            LEFT JOIN tasks t ON t.id = e.task_id
           WHERE e.customer_id = ?1 AND e.invoiced = 0 AND e.end_time IS NOT NULL
@@ -51,9 +49,7 @@ fn build_preview(conn: &Connection, customer_id: i64) -> AppResult<InvoicePrevie
             id: r.get(0)?,
             task_id: r.get(1)?,
             task_title: r.get(2)?,
-            start_time: r.get(3)?,
-            minutes: r.get::<_, Option<i64>>(4)?.unwrap_or(0),
-            note: r.get(5)?,
+            minutes: r.get::<_, Option<i64>>(3)?.unwrap_or(0),
         })
     })?;
 
@@ -96,21 +92,6 @@ fn build_preview(conn: &Connection, customer_id: i64) -> AppResult<InvoicePrevie
         let unit = rate.unwrap_or(0);
         let net = (hours * unit as f64).round() as i64;
 
-        let text = entries
-            .iter()
-            .map(|e| {
-                let day = DateTime::parse_from_rfc3339(&e.start_time)
-                    .map(|d| d.with_timezone(&Local).format("%d.%m.%Y").to_string())
-                    .unwrap_or_else(|_| e.start_time.clone());
-                let dur = format!("{}:{:02} h", e.minutes / 60, e.minutes % 60);
-                match e.note.as_deref().map(str::trim).filter(|n| !n.is_empty()) {
-                    Some(note) => format!("{day} · {dur} · {note}"),
-                    None => format!("{day} · {dur}"),
-                }
-            })
-            .collect::<Vec<_>>()
-            .join("\n");
-
         let name = settings
             .position_name_template
             .replace("{task}", &label)
@@ -121,7 +102,6 @@ fn build_preview(conn: &Connection, customer_id: i64) -> AppResult<InvoicePrevie
         positions.push(InvoicePosition {
             task_id: key,
             name: if name.trim().is_empty() { label } else { name },
-            text,
             minutes,
             billed_minutes: billed,
             hours,
@@ -566,7 +546,6 @@ fn build_payload(
                 "quantity": p.hours,
                 "price": p.unit_price_cents as f64 / 100.0,
                 "name": p.name,
-                "text": p.text,
                 "unity": { "id": meta.unity_id, "objectName": "Unity" },
                 "taxRate": settings.tax_rate
             })
